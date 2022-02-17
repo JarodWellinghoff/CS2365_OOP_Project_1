@@ -5,7 +5,7 @@
 The Customer Order System (COS) provides the customer with the following services described as use cases. Describe your classes using the UML class diagram notation and implement the COS in Java.  Describe any assumptions you make.  
 ### Use case name: Log On  
 ***
-|||
+|Use case name|Log On  |
 |:---|:---|
 |**Precondition**|The customer has created an account with the ID and password, a security question, and the customer’s answer to the question.  |
 |**Main sequence**|<ol><li>The customer enters the ID and password.</li><li>The system validates the customer ID and password.</li><li>If the customer ID and password are valid, the system displays the customer’s security question.</li><li>The customer enters the answer to the question.</li><li>If the customer’s response is the same as that stored in the system, the system displays a welcome message.</li></ol> |
