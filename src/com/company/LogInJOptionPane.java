@@ -6,10 +6,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JOptionPane;
 
 public class LogInJOptionPane {
-    public static void main(String[] args) {
-        final int CANCEL_OPTION = 0;
-        final int SIGNUP_OPTION = 1;
-        final int LOGIN_OPTION = 2;
+    private int result;
+    public final int CANCEL_OPTION = 0;
+    public final int SIGNUP_OPTION = 1;
+    public final int LOGIN_OPTION = 2;
+    public LogInJOptionPane(Customer customer) {
 
         JFrame frame = new JFrame();
         frame.setSize(500, 500);
@@ -27,17 +28,20 @@ public class LogInJOptionPane {
         userPlaceholder.changeAlpha(0.75f);
         passPlaceholder.changeAlpha(0.75f);
 
-        int result = JOptionPane.showOptionDialog(frame, objects, "Log In", JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE, null, possibleResults, 0);
+        result = JOptionPane.showOptionDialog(frame, objects, "Log In", JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, possibleResults, null);
 
         switch (result) {
             case CANCEL_OPTION -> System.out.println("Cancel chosen");
             case SIGNUP_OPTION -> System.out.println("Sign up chosen");
             case LOGIN_OPTION -> {
-                System.out.println("Log in chosen");
-                System.out.println(userField.getText() + " " + new String(passField.getPassword()));
+                customer.setID(userField.getText());
+                customer.setPassword(new String(passField.getPassword()));
             }
         }
-        System.exit(0);
+    }
+
+    public int getResult() {
+        return result;
     }
 }

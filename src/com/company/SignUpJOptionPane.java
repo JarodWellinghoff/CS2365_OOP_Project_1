@@ -3,7 +3,9 @@ package com.company;
 import javax.swing.*;
 
 public class SignUpJOptionPane {
-    public static void main(String[] args) {
+    private int result;
+
+    public SignUpJOptionPane(Customer customer) {
         final int CANCEL_OPTION = 0;
         final int SIGNUP_OPTION = 1;
 
@@ -12,7 +14,16 @@ public class SignUpJOptionPane {
         frame.setLocationRelativeTo(null);
 
         Object[] possibleResults = { "Cancel", "Sign Up" };
-        String[] possibleQuestions = { "Q1", "Q2", "Q3" };
+        String[] possibleQuestions = {
+                "In what city were you born?",
+                "What is the name of your favorite pet?",
+                "What is your mother's maiden name?",
+                "What high school did you attend?",
+                "What is the name of your first school?",
+                "What was the make of your first car?",
+                "What was your favorite food as a child?",
+                "Where did you meet your spouse?"
+        };
         String message1 = "Please enter your information";
         String message2 = "Chose a security question";
         JTextField userField = new JTextField();
@@ -31,14 +42,22 @@ public class SignUpJOptionPane {
         passCheckPlaceholder.changeAlpha(0.75f);
         answerPlaceholder.changeAlpha(0.75f);
 
-        int result = JOptionPane.showOptionDialog(frame, objects, "Sign Up", JOptionPane.OK_CANCEL_OPTION,
+        this.result = JOptionPane.showOptionDialog(frame, objects, "Sign Up", JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, possibleResults, 0);
 
-        switch (result) {
+        switch (this.result) {
             case CANCEL_OPTION -> System.out.println("Cancel chosen");
-            case SIGNUP_OPTION -> System.out.println(questionComboBox.getSelectedItem() + answerField.getText());
+            case SIGNUP_OPTION -> {
+                customer.setID(userField.getText());
+                customer.setPassword(String.valueOf(passField.getPassword()));
+                customer.setQuestion((String) questionComboBox.getSelectedItem());
+                customer.setAnswer(answerField.getText());
+            }
 
         }
-        System.exit(0);
+    }
+
+    public int getResult() {
+        return result;
     }
 }
